@@ -1,10 +1,14 @@
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import joblib
 import numpy as np
 
 # Create FastAPI app
-app = FastAPI(title="Loan Approval Prediction API")
+app = FastAPI(title="Loan Approval Prediction API", root_path="/api")
+
+# Mount static files for frontend
+app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
 
 # Load trained model
 model = joblib.load("model (1).pkl")
