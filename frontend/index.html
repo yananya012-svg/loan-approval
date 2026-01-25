@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Approval Prediction</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Loan Approval Prediction</h1>
+        <form id="loanForm">
+            <label for="Gender">Gender:</label>
+            <select id="Gender" required>
+                <option value="0">Female</option>
+                <option value="1">Male</option>
+            </select><br><br>
+
+            <label for="Married">Married:</label>
+            <select id="Married" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <label for="Education">Education:</label>
+            <select id="Education" required>
+                <option value="0">Not Graduate</option>
+                <option value="1">Graduate</option>
+            </select><br><br>
+
+            <label for="Self_Employed">Self Employed:</label>
+            <select id="Self_Employed" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <label for="ApplicantIncome">Applicant Income:</label>
+            <input type="number" id="ApplicantIncome" step="0.01" required><br><br>
+
+            <label for="LoanAmount">Loan Amount:</label>
+            <input type="number" id="LoanAmount" step="0.01" required><br><br>
+
+            <label for="Credit_History">Credit History:</label>
+            <select id="Credit_History" required>
+                <option value="0">No</option>
+                <option value="1">Yes</option>
+            </select><br><br>
+
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

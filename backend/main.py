@@ -1,0 +1,48 @@
+from fastapi import FastAPI
+from pydantic import BaseModel
+import joblib
+import numpy as np
+
+# Create FastAPI app
+app = FastAPI(title="Loan Approval Prediction API")
+
+# Load trained model
+model = joblib.load("model (1).pkl")
+
+# Input schema
+class LoanInput(BaseModel):
+    Gender: int              # 0 = Female, 1 = Male
+    Married: int             # 0 = No, 1 = Yes
+    Education: int           # 0 = Not Graduate, 1 = Graduate
+    Self_Employed: int       # 0 = No, 1 = Yes
+    ApplicantIncome: float
+    LoanAmount: float
+    Credit_History: int      # 0 or 1
+
+# Home route
+@app.get("/")
+def home():
+    return {"message": "Loan Approval Prediction API is running"}
+
+# Prediction route
+@app.post("/predict")
+def predict_loan(data: LoanInput):
+
+    input_data = np.array([[
+        data.Gender,
+        data.Married,
+        data.Education,
+        data.Self_Employed,
+        data.ApplicantIncome,
+        data.LoanAmount,
+        data.Credit_History
+    ]])
+
+    prediction = model.predict(input_data)[0]
+
+    if prediction == 1:
+        result = "✅ Loan Approved"
+    else:
+        result = "❌ Loan Rejected"
+
+    return {"prediction": result}
