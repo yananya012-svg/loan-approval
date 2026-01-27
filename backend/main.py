@@ -6,10 +6,11 @@ import numpy as np
 import os
 
 # Create FastAPI app
-app = FastAPI(title="Loan Approval Prediction API", root_path="/api")
+app = FastAPI(title="Loan Approval Prediction API")
 
 # Mount static files for frontend
-app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend"))
+app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 # Load trained model
 model_path = os.path.join(os.path.dirname(__file__), "model (1).pkl")
