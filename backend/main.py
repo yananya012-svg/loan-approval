@@ -1,4 +1,4 @@
-from fastapi import FastAPI, HTTPException
+pfrom fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import joblib
@@ -9,7 +9,7 @@ import os
 app = FastAPI(title="Loan Approval Prediction API")
 
 # Mount static files for frontend
-frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../frontend"))
+frontend_path = os.path.abspath(os.path.join(os.path.dirname(os.path.dirname(__file__)), "frontend"))
 app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 # Load trained model
