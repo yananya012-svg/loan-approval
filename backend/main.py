@@ -3,6 +3,7 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import joblib
 import numpy as np
+import os
 
 # Create FastAPI app
 app = FastAPI(title="Loan Approval Prediction API", root_path="/api")
@@ -11,7 +12,8 @@ app = FastAPI(title="Loan Approval Prediction API", root_path="/api")
 app.mount("/", StaticFiles(directory="../frontend", html=True), name="frontend")
 
 # Load trained model
-model = joblib.load("model (1).pkl")
+model_path = os.path.join(os.path.dirname(__file__), "model (1).pkl")
+model = joblib.load(model_path)
 
 # Input schema
 class LoanInput(BaseModel):
