@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 import joblib
@@ -31,22 +31,24 @@ def home():
 # Prediction route
 @app.post("/predict")
 def predict_loan(data: LoanInput):
+    try:
+        input_data = np.array([[
+            data.Gender,
+            data.Married,
+            data.Education,
+            data.Self_Employed,
+            data.ApplicantIncome,
+            data.LoanAmount,
+            data.Credit_History
+        ]])
 
-    input_data = np.array([[
-        data.Gender,
-        data.Married,
-        data.Education,
-        data.Self_Employed,
-        data.ApplicantIncome,
-        data.LoanAmount,
-        data.Credit_History
-    ]])
+        prediction = model.predict(input_data)[0]
 
-    prediction = model.predict(input_data)[0]
+        if prediction == 1:
+            result = "✅ Loan Approved"
+        else:
+            result = "❌ Loan Rejected"
 
-    if prediction == 1:
-        result = "✅ Loan Approved"
-    else:
-        result = "❌ Loan Rejected"
-
-    return {"prediction": result}
+        return {"prediction": result}
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Prediction failed: {str(e)}")
