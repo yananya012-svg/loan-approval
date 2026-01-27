@@ -13,8 +13,14 @@ frontend_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../fron
 app.mount("/", StaticFiles(directory=frontend_path, html=True), name="frontend")
 
 # Load trained model
-model_path = os.path.join(os.path.dirname(__file__), "model (1).pkl")
-model = joblib.load(model_path)
+model_path = os.path.join(os.path.dirname(os.path.dirname(__file__)), "model (1).pkl")
+print(f"Loading model from: {model_path}")
+try:
+    model = joblib.load(model_path)
+    print("Model loaded successfully")
+except Exception as e:
+    print(f"Error loading model: {e}")
+    model = None
 
 # Input schema
 class LoanInput(BaseModel):
@@ -34,6 +40,9 @@ def home():
 # Prediction route
 @app.post("/predict")
 def predict_loan(data: LoanInput):
+    if model is None:
+        raise HTTPException(status_code=500, detail="Model not loaded. Please check model file.")
+
     try:
         input_data = np.array([[
             data.Gender,
