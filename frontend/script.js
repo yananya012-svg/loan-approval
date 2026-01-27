@@ -11,14 +11,23 @@ document.getElementById("loanForm").addEventListener("submit", async function(e)
         Credit_History: parseInt(document.getElementById("Credit_History").value)
     };
 
-    const response = await fetch("/api/predict", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-    });
+    try {
+        const response = await fetch("/predict", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        });
 
-    const result = await response.json();
-    document.getElementById("result").innerText = result.prediction;
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        document.getElementById("result").innerText = result.prediction || "Error: No prediction received";
+    } catch (error) {
+        console.error("Error:", error);
+        document.getElementById("result").innerText = "Error: Unable to get prediction. Please try again.";
+    }
 });
