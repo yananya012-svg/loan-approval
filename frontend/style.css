@@ -8,16 +8,17 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;
     color: #333;
 }
 
 .container {
     background-color: rgba(255, 255, 255, 0.95);
-    padding: 30px;
-    border-radius: 15px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-    width: 450px;
+    padding: 2rem;
+    border-radius: 1rem;
+    box-shadow: 0 1rem 2.5rem rgba(0, 0, 0, 0.1);
+    width: min(90vw, 28rem);
+    max-width: 28rem;
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -25,10 +26,10 @@ body {
 h1 {
     text-align: center;
     color: #4a5568;
-    margin-bottom: 30px;
+    margin-bottom: 2rem;
     font-weight: 700;
-    font-size: 28px;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-size: 1.75rem;
+    text-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.1);
 }
 
 form {
@@ -37,18 +38,18 @@ form {
 }
 
 label {
-    margin-bottom: 8px;
+    margin-bottom: 0.5rem;
     font-weight: 500;
     color: #2d3748;
-    font-size: 14px;
+    font-size: 0.875rem;
 }
 
 input, select {
-    padding: 12px;
-    margin-bottom: 20px;
-    border: 2px solid #e2e8f0;
-    border-radius: 8px;
-    font-size: 16px;
+    padding: 0.75rem;
+    margin-bottom: 1.25rem;
+    border: 0.125rem solid #e2e8f0;
+    border-radius: 0.5rem;
+    font-size: 1rem;
     transition: all 0.3s ease;
     background-color: #f7fafc;
 }
@@ -56,35 +57,35 @@ input, select {
 input:focus, select:focus {
     outline: none;
     border-color: #667eea;
-    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    box-shadow: 0 0 0 0.1875rem rgba(102, 126, 234, 0.1);
     background-color: white;
 }
 
 button {
-    padding: 14px;
+    padding: 0.875rem;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
     border: none;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     cursor: pointer;
-    font-size: 18px;
+    font-size: 1.125rem;
     font-weight: 500;
     transition: all 0.3s ease;
-    margin-top: 10px;
+    margin-top: 0.625rem;
 }
 
 button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(102, 126, 234, 0.3);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.625rem 1.5625rem rgba(102, 126, 234, 0.3);
 }
 
 #result {
-    margin-top: 25px;
+    margin-top: 1.5625rem;
     text-align: center;
     font-weight: 700;
-    font-size: 20px;
-    padding: 15px;
-    border-radius: 8px;
+    font-size: 1.25rem;
+    padding: 0.9375rem;
+    border-radius: 0.5rem;
     transition: all 0.3s ease;
 }
 
