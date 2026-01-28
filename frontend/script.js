@@ -1,33 +1,26 @@
-document.getElementById("loanForm").addEventListener("submit", async function(e) {
-    e.preventDefault();
+document.getElementById('loanForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const data = Object.fromEntries(formData);
+  // Convert to numbers where needed
+  data.Gender = parseInt(data.Gender);
+  data.Married = parseInt(data.Married);
+  data.Education = parseInt(data.Education);
+  data.Self_Employed = parseInt(data.Self_Employed);
+  data.ApplicantIncome = parseFloat(data.ApplicantIncome);
+  data.LoanAmount = parseFloat(data.LoanAmount);
+  data.Credit_History = parseInt(data.Credit_History);
 
-    const data = {
-        Gender: parseInt(document.getElementById("Gender").value),
-        Married: parseInt(document.getElementById("Married").value),
-        Education: parseInt(document.getElementById("Education").value),
-        Self_Employed: parseInt(document.getElementById("Self_Employed").value),
-        ApplicantIncome: parseFloat(document.getElementById("ApplicantIncome").value),
-        LoanAmount: parseFloat(document.getElementById("LoanAmount").value),
-        Credit_History: parseInt(document.getElementById("Credit_History").value)
-    };
-
-    try {
-        const response = await fetch("/predict", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(data)
-        });
-
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
-
-        const result = await response.json();
-        document.getElementById("result").innerText = result.prediction || "Error: No prediction received";
-    } catch (error) {
-        console.error("Error:", error);
-        document.getElementById("result").innerText = "Error: Unable to get prediction. Please try again.";
-    }
+  fetch('http://127.0.0.1:8000/predict', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data)
+  })
+  .then(res => res.json())
+  .then(data => {
+    document.getElementById('result').innerText = data.prediction;
+  })
+  .catch(err => {
+    document.getElementById('result').innerText = 'Error: ' + err.message;
+  });
 });

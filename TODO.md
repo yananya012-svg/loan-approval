@@ -1,14 +1,19 @@
-# TODO List for Fixing "Unable to get prediction" Error in Loan Prediction App
+# TODO List for Updating UX/UI in CSS and Pushing to GitHub
 
-## Step 1: Fix Model Loading Path in Backend (main.py)
-- [x] Correct the model path to load from the root directory instead of backend/.
-- [x] Add debug prints to verify model loading.
+## Step 1: Update frontend/style.css
+- [x] Convert fixed pixel values to relative units (rem, vw) for better responsiveness and UX/UI.
+- [x] Adjust container width, padding, font sizes, margins, and other elements for improved mobile and desktop experience.
 
-## Step 2: Add Model Null Check in Prediction Route
-- [x] Add check in predict_loan function to handle if model is None.
-- [x] Return proper error response if model not loaded.
+## Step 2: Check and Install GitHub CLI
+- [ ] Verify if GitHub CLI (gh) is installed.
+- [ ] If not, install it using the provided gh_installer.msi.
 
-## Step 3: Test the Changes
-- [x] Run the backend locally to ensure it starts without errors.
-- [ ] Test the prediction endpoint with valid data.
-- [ ] Verify frontend handles errors gracefully.
+## Step 3: Create New Branch
+- [ ] Create a new branch with prefix 'blackboxai/css-updates'.
+
+## Step 4: Commit Changes
+- [ ] Add the updated style.css to Git.
+- [ ] Commit the changes with a descriptive message.
+
+## Step 5: Push to GitHub
+- [ ] Push the new branch to GitHub.
